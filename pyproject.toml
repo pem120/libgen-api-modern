@@ -43,6 +43,88 @@ pytest = "^8.4.1"
 pytest-asyncio = "^1.1.0"
 
 
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "ipykernel<7.0.0,>=6.29.5",
+    "pytest<9.0.0,>=8.4.1",
+    "pytest-asyncio<2.0.0,>=1.1.0",
+]
+
+[tool.pdm.build]
+includes = [
+    "libgen",
+]
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[project]
+authors = [
+    {name = "Johnnie", email = "johnnie610@duck.com"},
+]
+license = {text = "MIT"}
+requires-python = "<4.0,>=3.9"
+dependencies = [
+    "aiohttp>=3.12.0,<4.0.0",
+    "rich<15.0.0,>=14.0.0",
+    "requests<3.0.0,>=2.32.3",
+]
+name = "libgen-api-modern"
+version = "1.0.0"
+description = "Search Library Genesis. This library enables you to search Library Genesis programmatically."
+readme = "README.md"
+keywords = [
+    "libgen",
+    "library genesis",
+    "library",
+    "genesis",
+    "search",
+    "download",
+    "books",
+    "articles",
+    "non-fiction",
+    "fiction",
+    "sci-tech",
+    "sci-mag",
+    "scientific",
+    "magazines",
+]
+classifiers = [
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Internet",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Utilities",
+]
+
+[project.urls]
+Repository = "https://github.com/Johnnie610/libgen-api-modern"
+
+[project.scripts]
+libgen = "libgen.cli:main"
+
+[dependency-groups]
+dev = [
+    "ipykernel<7.0.0,>=6.29.5",
+    "pytest<9.0.0,>=8.4.1",
+    "pytest-asyncio<2.0.0,>=1.1.0",
+]
+
+[tool.pytest.ini_options]
+# Pytest automatically searches the 'tests' directory by default.
+# If you wanted to explicitly list the subdirectories:
+testpaths = [
+    "tests/async",
+    "tests/synchronous",
+]
+python_files = "Test*.py"
+addopts = "--override-ini=env:DEBUG=True"

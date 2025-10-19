@@ -14,16 +14,16 @@ import logging
 import re
 
 from typing import Any
-from parser import LibgenHTMLParser
-from models import BookData, DownloadLinks
+from .parser import LibgenHTMLParser
+from .models import BookData, DownloadLinks
 
-from errors import (
+from .errors import (
     LibgenNetworkError,
     LibgenSearchError,
     LibgenParseError,
 )
 
-from libgen_types import (
+from .types import (
     URL,
     ProxyList,
     RawBookResult,
@@ -213,7 +213,6 @@ class LibgenClient:
             "covers": "on",
             "filesuns": "all",
         }
-
 
         for base_url in LIBGEN_URLS:
             search_url = f"{base_url}/index.php"

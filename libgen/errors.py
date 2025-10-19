@@ -5,15 +5,21 @@
 
 from typing import Optional
 
+
 class LibgenError(Exception):
     """Base exception class for all library errors."""
+
     def __init__(self, message: str, *args):
         self.message = message
         super().__init__(message, *args)
 
+
 class LibgenNetworkError(LibgenError):
     """Exception for network-related errors."""
-    def __init__(self, message: str, status_code: Optional[int] = None, url: Optional[str] = None):
+
+    def __init__(
+        self, message: str, status_code: Optional[int] = None, url: Optional[str] = None
+    ):
         self.status_code = status_code
         self.url = url
         full_message = f"{message}"
@@ -23,8 +29,10 @@ class LibgenNetworkError(LibgenError):
             full_message += f", URL: {url}"
         super().__init__(full_message)
 
+
 class LibgenSearchError(LibgenError):
     """Exception for failed search operations."""
+
     def __init__(self, message: str, query: Optional[str] = None):
         self.query = query
         full_message = f"{message}"
@@ -32,6 +40,8 @@ class LibgenSearchError(LibgenError):
             full_message += f" (Query: '{query}')"
         super().__init__(full_message)
 
+
 class LibgenParseError(LibgenError):
     """Exception for failures in parsing HTML content."""
+
     pass

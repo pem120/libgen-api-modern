@@ -31,11 +31,18 @@ console = Console()
 async def download_file(url: str, output_path: str):
     """Asynchronously downloads a file with a progress bar."""
     if os.path.exists(output_path):
-        if console.input(f"[yellow]File '{output_path}' already exists. Overwrite? (y/N): [/yellow]").lower() != 'y':
+        if (
+            console.input(
+                f"[yellow]File '{output_path}' already exists. Overwrite? (y/N): [/yellow]"
+            ).lower()
+            != "y"
+        ):
             console.print("[red]Download canceled.[/red]")
             return
 
-    console.print(f"Starting download from [green]{url}[/green] to [cyan]{output_path}[/cyan]")
+    console.print(
+        f"Starting download from [green]{url}[/green] to [cyan]{output_path}[/cyan]"
+    )
 
     try:
         async with aiohttp.ClientSession() as session:
@@ -46,13 +53,20 @@ async def download_file(url: str, output_path: str):
                 with Progress(
                     TextColumn("[bold blue]{task.fields[filename]}", justify="right"),
                     BarColumn(bar_width=None),
-                    "[progress.percentage]{task.percentage:>3.1f}%", "•",
-                    DownloadColumn(), "•",
-                    TransferSpeedColumn(), "•",
+                    "[progress.percentage]{task.percentage:>3.1f}%",
+                    "•",
+                    DownloadColumn(),
+                    "•",
+                    TransferSpeedColumn(),
+                    "•",
                     TimeRemainingColumn(),
                     transient=True,
                 ) as progress:
-                    task = progress.add_task("Downloading", total=total_size, filename=os.path.basename(output_path))
+                    task = progress.add_task(
+                        "Downloading",
+                        total=total_size,
+                        filename=os.path.basename(output_path),
+                    )
                     with open(output_path, "wb") as f:
                         async for chunk in resp.content.iter_chunked(8192):
                             f.write(chunk)
@@ -94,7 +108,9 @@ def print_search_results(results: List[BookData]):
 
 async def interactive_mode():
     """Runs the interactive search and download loop."""
-    console.print("[bold blue]Welcome to Libgen Interactive Mode. Type 'exit' or 'quit' to leave.[/bold blue]")
+    console.print(
+        "[bold blue]Welcome to Libgen Interactive Mode. Type 'exit' or 'quit' to leave.[/bold blue]"
+    )
     while True:
         try:
             query = console.input("[green]Search query> [/green]").strip()
@@ -112,7 +128,9 @@ async def interactive_mode():
 
             print_search_results(results)
 
-            choice = console.input("Enter the ID of the book to download (or press Enter to search again): ").strip()
+            choice = console.input(
+                "Enter the ID of the book to download (or press Enter to search again): "
+            ).strip()
             if not choice:
                 continue
 
@@ -122,13 +140,22 @@ async def interactive_mode():
                 console.print("[red]Invalid ID.[/red]")
                 continue
 
-            if not (selected_book.download_links and selected_book.download_links.get_link):
+            if not (
+                selected_book.download_links and selected_book.download_links.get_link
+            ):
                 console.print("[red]No direct download link found for this book.[/red]")
                 continue
 
-            sane_title = "".join(c for c in selected_book.title if c.isalnum() or c in " ._-")
+            sane_title = "".join(
+                c for c in selected_book.title if c.isalnum() or c in " ._-"
+            )
             default_filename = f"{sane_title[:60]}.{selected_book.extension}"
-            output = console.input(f"Enter output filename (default: [cyan]{default_filename}[/cyan]): ").strip() or default_filename
+            output = (
+                console.input(
+                    f"Enter output filename (default: [cyan]{default_filename}[/cyan]): "
+                ).strip()
+                or default_filename
+            )
 
             await download_file(selected_book.download_links.get_link, output)
 
@@ -140,19 +167,27 @@ async def interactive_mode():
 
 def main():
     parser = argparse.ArgumentParser(description="A modern CLI for Library Genesis.")
-    subparsers = parser.add_subparsers(dest="command", required=True, help="Available commands")
+    subparsers = parser.add_subparsers(
+        dest="command", required=True, help="Available commands"
+    )
 
     # Search command
     search_parser = subparsers.add_parser("search", help="Search for books.")
     search_parser.add_argument("query", type=str, help="The search query.")
 
     # Download command
-    download_parser = subparsers.add_parser("download", help="Download a book from a direct URL.")
+    download_parser = subparsers.add_parser(
+        "download", help="Download a book from a direct URL."
+    )
     download_parser.add_argument("url", type=str, help="The direct download URL.")
-    download_parser.add_argument("--output", "-o", type=str, help="The output filename.")
+    download_parser.add_argument(
+        "--output", "-o", type=str, help="The output filename."
+    )
 
     # Interactive command
-    subparsers.add_parser("interactive", help="Enter interactive search and download mode.")
+    subparsers.add_parser(
+        "interactive", help="Enter interactive search and download mode."
+    )
 
     args = parser.parse_args()
 
@@ -161,7 +196,7 @@ def main():
             results = asyncio.run(search_async(args.query))
             print_search_results(results)
         elif args.command == "download":
-            filename = args.output or os.path.basename(args.url.split('?')[0])
+            filename = args.output or os.path.basename(args.url.split("?")[0])
             asyncio.run(download_file(args.url, filename))
         elif args.command == "interactive":
             asyncio.run(interactive_mode())
@@ -172,7 +207,9 @@ def main():
         console.print("\n[yellow]Operation cancelled by user.[/yellow]")
         sys.exit(0)
     except Exception as e:
-        console.print(f"[bold red]An unexpected critical error occurred: {e}[/bold red]")
+        console.print(
+            f"[bold red]An unexpected critical error occurred: {e}[/bold red]"
+        )
         sys.exit(1)
 
 

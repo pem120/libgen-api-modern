@@ -9,6 +9,7 @@
 
 from dataclasses import dataclass
 
+
 @dataclass(frozen=True)
 class DownloadLinks:
     get_link: str | None
@@ -23,12 +24,13 @@ class BookData:
     id: str
     authors: tuple[str, ...]
     title: str
-    publisher: str | None
-    year: str | None
-    pages: str | None
-    language: str | None
-    size: str | None
-    extension: str | None
-    isbn: str | None
-    cover_url: str | None
-    download_links: DownloadLinks | None
+    publisher: str | None = None
+    year: str | None = None
+    pages: str | None = None
+    language: str | None = None
+    size: str | None = None
+    extension: str | None = None
+    isbn: str | None = None
+    cover_url: str | None = None
+    download_links: DownloadLinks | None = None
+    mirror_url: str | None = None

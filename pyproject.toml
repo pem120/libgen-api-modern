@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "libgen-api-modern"
+name = "libgenesis-api"
 version = "1.0.0"
 description = "Search Library Genesis. This library enables you to search Library Genesis programmatically."
 authors = ["Johnnie <johnnie610@duck.com>","Pem120"]
@@ -72,7 +72,7 @@ dependencies = [
     "rich<15.0.0,>=14.0.0",
     "requests<3.0.0,>=2.32.3",
 ]
-name = "libgen-api-modern"
+name = "libgenesis-api"
 version = "1.0.0"
 description = "Search Library Genesis. This library enables you to search Library Genesis programmatically."
 readme = "README.md"

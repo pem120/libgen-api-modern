@@ -23,7 +23,7 @@ from rich.table import Table
 
 from errors import LibgenError, LibgenSearchError, LibgenNetworkError
 from models import BookData
-from client import search_async
+from .clientlient import search_async
 
 console = Console()
 

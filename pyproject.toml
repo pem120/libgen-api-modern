@@ -2,7 +2,7 @@
 name = "libgen-api-modern"
 version = "1.0.0"
 description = "Search Library Genesis. This library enables you to search Library Genesis programmatically."
-authors = ["Johnnie <johnnie610@duck.com>"]
+authors = ["Johnnie <johnnie610@duck.com>","Pem120"]
 license = "MIT"
 readme = "README.md"
 keywords = ["libgen", "library genesis", "library", "genesis", "search", "download", "books", "articles", "non-fiction", "fiction", "sci-tech", "sci-mag", "scientific", "magazines"]
@@ -63,6 +63,7 @@ build-backend = "pdm.backend"
 [project]
 authors = [
     {name = "Johnnie", email = "johnnie610@duck.com"},
+    {name="pem120" email="18i897.iiibb@gmail.com"}
 ]
 license = {text = "MIT"}
 requires-python = "<4.0,>=3.9"

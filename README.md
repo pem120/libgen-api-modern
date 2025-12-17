@@ -1,4 +1,4 @@
-# Libgen API Modern
+# Libgen API
 
 Libgen-API-Modern is a lightweight, simple, and blazingly fast Python library for interacting with Library Genesis. It provides both synchronous and asynchronous methods to search for and resolve download links for books, all with a modern and elegant interface.
 

@@ -43,6 +43,7 @@ SearchField = Literal[
     "def", "title", "author", "series", "publisher", "year", "language", "isbn", "md5"
 ]
 
+
 # TypedDict for raw search results
 class RawBookResult(TypedDict, total=False):
     """Dictionary representation of a book search result."""
@@ -86,11 +87,9 @@ class MirrorLinks(TypedDict, total=False):
 class HTTPClient(Protocol):
     """Protocol for HTTP clients."""
 
-    async def get(self, url: str, **kwargs) -> Any:
-        ...
+    async def get(self, url: str, **kwargs) -> Any: ...
 
-    async def close(self) -> None:
-        ...
+    async def close(self) -> None: ...
 
 
 # Type variables for generic functions

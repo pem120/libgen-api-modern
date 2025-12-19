@@ -3,7 +3,7 @@
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
 
-from .client import search_async, search_sync
+# from .client import search_async, search_sync
 from .errors import (
     LibgenError,
     LibgenNetworkError,

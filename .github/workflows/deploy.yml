@@ -20,6 +20,8 @@ jobs:
         uses: astral-sh/setup-uv@v7
       - name: Install Python 3.13
         run: uv python install 3.13
+      - name: Setup venv
+        run: uv venv --clear
       - name: Build
         run: uv build
       - name: Install

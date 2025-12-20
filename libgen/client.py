@@ -221,7 +221,9 @@ class LibgenClient:
                 setattr(
                     self.session,
                     method,
-                    functools.partial(getattr(self.session, method), timeout=timeout),
+                    functools.partial(
+                        getattr(self.session, method), timeout=self.timeout
+                    ),
                 )
         return self
 
